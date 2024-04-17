@@ -16,5 +16,20 @@ late final int score 	;
 late final String title;
 late final int descendants ;
 
+ItemModel.fromJson(Map<String,dynamic> parsedjson)
+: id = parsedjson['id'],
+  deleted= parsedjson['delete'],
+  type= parsedjson['type'],
+  by= parsedjson['by'],
+  time	= parsedjson['time'],
+  text	= parsedjson['text'],
+  dead	= parsedjson['dead'],
+  parent	= parsedjson['parent'],
+  kids	= parsedjson['kids'],
+  url= parsedjson['url'],
+  score 	= parsedjson['score'],
+  title= parsedjson['title'],
+  descendants = parsedjson['descendants'];
+
 
 }
