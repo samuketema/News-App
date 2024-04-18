@@ -5,15 +5,17 @@ import '../item_model.dart';
 import 'package:news/src/models/item_model.dart';
 
 class NewApiProvider { 
+
+  final root = 'https://hacker-news.firebaseio.com/v0';
   Client client = new Client();
   fetchTopIds() async{
-   final responce = await client.get(Uri.parse('https://hacker-news.firebaseio.com/v0/topstories.json'));
+   final responce = await client.get(Uri.parse('/topstories.json'));
    final ide = json.decode(responce.body);
    return ide;
   }
 
   fetchItem() async{
-    final responce = await client.get(Uri.parse('https://hacker-news.firebaseio.com/v0/item/8863.json'));
+    final responce = await client.get(Uri.parse('/item/8863.json'));
     
     final parsedJson = json.decode(responce.body);
 
