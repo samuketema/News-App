@@ -9,7 +9,7 @@ void main(){
   final newsApi = NewApiProvider();
 
     newsApi.client = MockClient(  (request) async{
-      return Response(json.encode([1,2,3,4,5]), 10);
+      return Response(json.encode([1,2,3,4,5]), 200);
     });
 
     var ids =  await newsApi.fetchItem();
