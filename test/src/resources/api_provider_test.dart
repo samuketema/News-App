@@ -18,6 +18,15 @@ void main(){
   } );
 
   test('Testing the fethcItems function of the newsApiprovider class', ()async {
-    
-  })
+    final newsApi = NewApiProvider();
+
+    newsApi.client = MockClient((request) async{
+      final jsonMap = {'id' : 123};
+      return Response(json.encode(jsonMap),200);
+    });
+
+    var item = await newsApi.fetchItem();
+
+    expect(item.id, 111 );
+  });
 }
