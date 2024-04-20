@@ -12,7 +12,7 @@ void main(){
       return Response(json.encode([1,2,3,4,5]), 200);
     });
 
-    var ids =  await newsApi.fetchItem();
+    var ids =  await newsApi.fetchTopIds();
 
     expect(ids, [1,2,3,4,5]);
   } );
