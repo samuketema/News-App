@@ -14,7 +14,7 @@ class NewApiProvider {
    return ide;
   }
 
-  fetchItem() async{
+  fetchItem( int id) async{
     final responce = await client.get(Uri.parse('/item/8863.json'));
     
     final parsedJson = json.decode(responce.body);

@@ -25,8 +25,8 @@ void main(){
       return Response(json.encode(jsonMap),200);
     });
 
-    var item = await newsApi.fetchItem();
+    var item = await newsApi.fetchItem(13);
 
-    expect(item.id, 111 );
+    expect(item.id, 123 );
   });
 }
