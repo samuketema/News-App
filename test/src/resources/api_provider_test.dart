@@ -16,4 +16,8 @@ void main(){
 
     expect(ids, [1,2,3,4,5]);
   } );
+
+  test('Testing the fethcItems function of the newsApiprovider class', ()async {
+    
+  })
 }
