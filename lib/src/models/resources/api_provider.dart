@@ -15,7 +15,7 @@ class NewApiProvider {
   }
 
   fetchItem( int id) async{
-    final responce = await client.get(Uri.parse('&root/item/8863.json'));
+    final responce = await client.get(Uri.parse('$root/item/8863.json'));
     
     final parsedJson = json.decode(responce.body);
 
