@@ -6,7 +6,7 @@ import 'dart:async';
 import '../item_model.dart';
 
 class NewsDbProvier {
-  Database db;
+  late Database db;
 
   init() async {
     Directory documentDirectory = await getApplicationDocumentsDirectory();
@@ -45,5 +45,14 @@ class NewsDbProvier {
       whereArgs: [id],
 
     );
+
+    if (maps.length > 0) {
+      return ItemModel.fromDb( maps.first);
+    } else {
+      return null;
+    }
+  }
+  addItem(ItemModel item){
+    return db.insert("items", item.toMap());
   }
 }
