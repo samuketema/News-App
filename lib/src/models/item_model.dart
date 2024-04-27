@@ -18,12 +18,27 @@ late final int? descendants ;
 
 ItemModel.fromJson(Map<String,dynamic> parsedjson)
 : id = parsedjson['id'],
-  deleted= parsedjson['deleted'],
+  deleted= parsedjson['delete'],
   type= parsedjson['type'],
   by= parsedjson['by'],
   time	= parsedjson['time'],
   text	= parsedjson['text'],
   dead	= parsedjson['dead'],
+  parent	= parsedjson['parent'],
+  kids	= parsedjson['kids'],
+  url= parsedjson['url'],
+  score 	= parsedjson['score'],
+  title= parsedjson['title'],
+  descendants = parsedjson['descendants'];
+
+  ItemModel.fromDb(Map<String,dynamic> parsedjson)
+: id = parsedjson['id'],
+  deleted= parsedjson['delete'] == 1,
+  type= parsedjson['type'],
+  by= parsedjson['by'],
+  time	= parsedjson['time'],
+  text	= parsedjson['text'],
+  dead	= parsedjson['dead'] == 1,
   parent	= parsedjson['parent'],
   kids	= parsedjson['kids'],
   url= parsedjson['url'],
