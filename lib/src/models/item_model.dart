@@ -18,7 +18,7 @@ late final int? descendants ;
 
 ItemModel.fromJson(Map<String,dynamic> parsedjson)
 : id = parsedjson['id'],
-  deleted= parsedjson['delete'],
+  deleted= parsedjson['deleted'],
   type= parsedjson['type'],
   by= parsedjson['by'],
   time	= parsedjson['time'],

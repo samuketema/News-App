@@ -9,15 +9,15 @@ class NewApiProvider {
   final root = 'https://hacker-news.firebaseio.com/v0';
   Client client = new Client();
   fetchTopIds() async{
-   final responce = await client.get(Uri.parse('$root/topstories.json'));
-   final ide = json.decode(responce.body);
+   final response = await client.get(Uri.parse('$root/topstories.json'));
+   final ide = json.decode(response.body);
    return ide;
   }
 
   fetchItem( int id) async{
-    final responce = await client.get(Uri.parse('$root/item/8863.json'));
+    final response = await client.get(Uri.parse('$root/item/$id.json'));
     
-    final parsedJson = json.decode(responce.body);
+    final parsedJson = json.decode(response.body);
 
    return ItemModel.fromJson(parsedJson);
   }
