@@ -14,9 +14,36 @@ class NewsDbProvier {
     db = await openDatabase(
       path,
       version: 1,
-      onCreate: (Database db, int version) {
-        
+      onCreate: (Database newDb, int version) {
+        newDb.execute('''
+          Create TABLE Items 
+          (
+            id INTEGER PRIMARY KEY,
+            type TEXT,
+            by TEXT ,
+            time INTEGER,
+            text TEXT,
+            parent INTEGER,
+            kids BLOB,
+            dead INTEGER,
+            deleted INTEGER,
+            url TEXT,
+            score INTEGER,
+            title TEXT,
+            descendants INTEGER
+            )
+  
+         ''');
       },
-      )
+      );
+  }
+  fetchItem(int id) async{
+    final maps = await db.query(
+      "Items",
+      columns: null,
+      where: "id = ?",
+      whereArgs: [id],
+
+    );
   }
 }
