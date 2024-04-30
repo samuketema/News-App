@@ -52,7 +52,7 @@ class NewsDbProvier {
       return null;
     }
   }
-   addItem(ItemModel item){
+  Future<int> addItem(ItemModel item){
     return db.insert("items", item.toMap());
   }
 }
