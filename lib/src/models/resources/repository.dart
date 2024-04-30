@@ -8,11 +8,19 @@ class Repository{
   NewsDbProvier dbProvier = NewsDbProvier();
   NewApiProvider apiProvider = NewApiProvider();
 
-  fetchTopIds(){
+   fetchTopIds(){
+    return apiProvider.fetchTopIds();
 
   }
   
-  fetchItem(){
-    
+  fetchItem(int id) async {
+    var item = await dbProvier.fetchItem(id);
+    if (item != null){
+      return item;
+    }
+
+    else item = await apiProvider.fetchItem(id);
+    dbProvier.addItem(item);
+    return item;
   }
 }
