@@ -11,7 +11,7 @@ class NewApiProvider {
   Future<List<int>> fetchTopIds() async{
    final response = await client.get(Uri.parse('$root/topstories.json'));
    final ide = json.decode(response.body);
-   return ide;
+   return ide.cast<int>();
   }
 
   Future<ItemModel>  fetchItem ( int id) async{
