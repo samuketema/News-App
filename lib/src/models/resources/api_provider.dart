@@ -1,10 +1,10 @@
 import 'package:http/http.dart' show Client;
 import 'dart:convert';
 import '../item_model.dart';
-
+import 'repository.dart';
 import 'package:news/src/models/item_model.dart';
 
-class NewApiProvider { 
+class NewApiProvider implements Source { 
 
   final root = 'https://hacker-news.firebaseio.com/v0';
   Client client = new Client();
@@ -20,5 +20,4 @@ class NewApiProvider {
     final parsedJson = json.decode(response.body);
 
    return ItemModel.fromJson(parsedJson);
-  }
-}
+  }}
