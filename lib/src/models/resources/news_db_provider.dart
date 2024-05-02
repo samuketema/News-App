@@ -4,10 +4,14 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'dart:async';
 import '../item_model.dart';
+import 'repository.dart';
 
-class NewsDbProvier {
+class NewsDbProvier implements Source,Cache {
   late Database db;
-
+  //Todo - Store and Fetch top ids.
+  Future<List<int>>? fetchTopIds(){
+    return null;
+  }
   void init() async {
     Directory documentDirectory = await getApplicationDocumentsDirectory();
     final path = join(documentDirectory.path, "items.db");
