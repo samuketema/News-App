@@ -7,7 +7,12 @@ import '../item_model.dart';
 import 'repository.dart';
 
 class NewsDbProvier implements Source,Cache {
+  NewsDbProvider(){
+    init();
+  }
+
   late Database db;
+
   //Todo - Store and Fetch top ids.
   Future<List<int>>? fetchTopIds(){
     return null;
@@ -56,7 +61,10 @@ class NewsDbProvier implements Source,Cache {
       return null;
     }
   }
-  Future<int> addItem(ItemModel item){
+  Future<int> addItem ( ItemModel? item){
+    if (item != null){
     return db.insert("items", item.toMap());
+    } else return Future.value(-1);
   }
 }
+final newsDbProvider = NewsDbProvier();
