@@ -8,7 +8,7 @@ class StoriesBloc{
 
   final _repository = Repository();
 
-  Stream<List<int>?> get topIds => _topIds.stream;
+  Stream<List<int>?> get topIds => _topIds.stream; 
 
   fetchTopIds() async{
     final ids = await _repository.fetchTopIds();
