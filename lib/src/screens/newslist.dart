@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import '../blocs/stories-provider.dart';
 class NewsList extends StatelessWidget{
@@ -16,15 +17,16 @@ Widget buildList(StoriesBloc bloc){
     stream: bloc.topIds,
     builder: (context, AsyncSnapshot<List<int>?> snapshot){
       if (!snapshot.hasData){
-      return Text('still waiting on Ids');
+        return Center(
+          child: CircularProgressIndicator(),
+        );
 
       }
-    
-    
+      
     return ListView.builder(
       itemCount:snapshot.data?.length ?? 0,
       itemBuilder:(context,int index){
-        return Text(snapshot.data?[index].toString() ?? " ");
+        return Text('${snapshot.data?[index]}');
       },
     );
 }
