@@ -8,8 +8,12 @@ class StoriesBloc{
   final _items = BehaviorSubject();
 
   final _repository = Repository();
-
+  Stream<Map<int,Future<ItemModel>>>? item;
   Stream<List<int>?> get topIds => _topIds.stream; 
+  
+  StoriesBloc(){
+    item = _items.stream.transform(_itemsTransformer());
+  }
 
   Function(int) get fetchItem => _items.sink.add;
 
@@ -18,7 +22,7 @@ class StoriesBloc{
     _topIds.sink.add(ids);
   }
 
-  _itemsTransfromer(){
+  _itemsTransformer(){
     return ScanStreamTransformer(
       (Map <int,Future<ItemModel?>>? cache,int id,_){
         cache?[id] = _repository.fetchItem(id);
