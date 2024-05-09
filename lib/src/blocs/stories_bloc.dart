@@ -5,10 +5,13 @@ import '../models/item_model.dart';
 import '../models/resources/repository.dart';
 class StoriesBloc{
   final _topIds = PublishSubject<List<int>?>();
+  final _items = BehaviorSubject();
 
   final _repository = Repository();
 
   Stream<List<int>?> get topIds => _topIds.stream; 
+
+  Function(int) get fetchItem => _items.sink.add;
 
   fetchTopIds() async{
     final ids = await _repository.fetchTopIds();
