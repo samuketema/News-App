@@ -22,7 +22,11 @@ class NewsListTile extends StatelessWidget {
           return Text('Strill loading item $itemId');
         }
         print('Future data: ${itemSnapshot.data}');
-       return buildTile(itemSnapshot.data as  ItemModel);
+       return Column(
+        children: [buildTile(itemSnapshot.data as  ItemModel),
+                    Divider(
+                      height: 10.0,
+                    )],) ;
 
        }
        
@@ -34,6 +38,11 @@ class NewsListTile extends StatelessWidget {
     return ListTile(
       title: Text('${item.title}'),
       subtitle: Text('${item.score} points'),
+      trailing: Column(
+        children: [
+          Icon(Icons.comment),
+          Text('${item.descendants}'),
+        ]),
     );
   }
 }
