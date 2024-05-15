@@ -1,6 +1,4 @@
 
-import 'dart:js_interop';
-
 import 'api_provider.dart';
 import 'news_db_provider.dart';
 import '../item_model.dart';

@@ -6,30 +6,31 @@ import 'dart:async';
 import '../item_model.dart';
 import 'repository.dart';
 
-class NewsDbProvier implements Source,Cache {
-  NewsDbProvider(){
+class NewsDbProvider implements Source, Cache {
+  NewsDbProvider() {
     init();
   }
 
-  late Database db;
+  late Future<Database> db;
 
-  //Todo - Store and Fetch top ids.
-  Future<List<int>>? fetchTopIds(){
+  // Todo - Store and Fetch top ids.
+  Future<List<int>>? fetchTopIds() {
     return null;
   }
-  void init() async {
+
+  Future<void> init() async {
     Directory documentDirectory = await getApplicationDocumentsDirectory();
     final path = join(documentDirectory.path, "items.db");
-    db = await openDatabase(
+    db = openDatabase(
       path,
       version: 1,
       onCreate: (Database newDb, int version) {
         newDb.execute('''
-          Create TABLE Items 
+          CREATE TABLE Items 
           (
             id INTEGER PRIMARY KEY,
             type TEXT,
-            by TEXT ,
+            by TEXT,
             time INTEGER,
             text TEXT,
             parent INTEGER,
@@ -40,31 +41,37 @@ class NewsDbProvier implements Source,Cache {
             score INTEGER,
             title TEXT,
             descendants INTEGER
-            )
-  
-         ''');
+          )
+        ''');
       },
-      );
+    );
   }
-  Future<ItemModel?> fetchItem(int id) async{
-    final maps = await db.query(
+
+  Future<ItemModel?> fetchItem(int id) async {
+    final Database database = await db;
+    final maps = await database.query(
       "Items",
       columns: null,
       where: "id = ?",
       whereArgs: [id],
-
     );
 
     if (maps.length > 0) {
-      return ItemModel.fromDb( maps.first);
+      return ItemModel.fromDb(maps.first);
     } else {
       return null;
     }
   }
-  Future<int> addItem ( ItemModel? item){
-    if (item != null){
-    return db.insert("items", item.toMap());
-    } else return Future.value(-1);
-  }
+
+  Future<int> addItem(ItemModel? item) async {
+    if (item != null) {
+      final Database database = await db;
+      return database.insert("Items", item.toMap(),
+       conflictAlgorithm : ConflictAlgorithm.ignore);
+     
+    } else {
+      return Future.value(-1);
+    }
 }
-final newsDbProvider = NewsDbProvier();
+}
+final newsDbProvider = NewsDbProvider();

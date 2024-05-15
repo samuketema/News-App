@@ -1,15 +1,16 @@
 
 import 'package:flutter/material.dart';
 import '../blocs/stories-provider.dart';
+import '../widgets/news_list_tile.dart';
 class NewsList extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    final bloc = StoryProvider.of(context);
+    final bloc = StoryProvider?.of(context);
 
-    bloc.fetchTopIds();
+    bloc?.fetchTopIds();
     return Scaffold(
       appBar: AppBar(title: Text('Top News')),
-      body: buildList(bloc)
+      body: buildList(bloc as StoriesBloc)
 );
   }
 Widget buildList(StoriesBloc bloc){
@@ -26,7 +27,10 @@ Widget buildList(StoriesBloc bloc){
     return ListView.builder(
       itemCount:snapshot.data?.length ?? 0,
       itemBuilder:(context,int index){
-        return Text('${snapshot.data?[index]}');
+        bloc.fetchItem(snapshot.data?[index] as int);
+        return NewsListTile(
+          itemId: snapshot.data?[index],
+        );
       },
     );
 }
