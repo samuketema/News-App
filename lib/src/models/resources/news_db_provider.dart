@@ -21,7 +21,7 @@ class NewsDbProvider implements Source, Cache {
   Future<void> init() async {
     Directory documentDirectory = await getApplicationDocumentsDirectory();
     final path = join(documentDirectory.path, "items2.db");
-    db = openDatabase(
+    db =  openDatabase(
       path,
       version: 1,
       onCreate: (Database newDb, int version) {
@@ -73,5 +73,11 @@ class NewsDbProvider implements Source, Cache {
       return Future.value(-1);
     }
 }
+
+Future<int> clear() async {
+  final Database database = await db;
+  return database.delete("Items");
+}
+
 }
 final newsDbProvider = NewsDbProvider();

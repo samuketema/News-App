@@ -23,6 +23,9 @@ class StoriesBloc{
     final ids = await _repository.fetchTopIds();
     _topIds.sink.add(ids);
   }
+  clearCach(){
+    return _repository.clearCach();
+  }
 
   _itemsTransformer(){
     return ScanStreamTransformer(

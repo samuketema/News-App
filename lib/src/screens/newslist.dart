@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import '../blocs/stories-provider.dart';
 import '../widgets/news_list_tile.dart';
+import '../widgets/refresh.dart';
 class NewsList extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,8 @@ Widget buildList(StoriesBloc bloc){
 
       }
       
-    return ListView.builder(
+    return Refresh(
+      child:ListView.builder(
       itemCount:snapshot.data?.length ?? 0,
       itemBuilder:(context,int index){
         bloc.fetchItem(snapshot.data?[index] as int);
@@ -32,6 +34,7 @@ Widget buildList(StoriesBloc bloc){
           itemId: snapshot.data?[index],
         );
       },
+    )
     );
 }
     );
